@@ -6,12 +6,17 @@
 //
 
 import Vapor
+import Leaf
 
 struct CreateEntryData: Content {
     let title: String
     let content: String
 }
 
+struct IndexContext: Encodable {
+    let entries: [Entry]
+    let count: Int
+}
 
 // Entry 모델에 대한 CRUD (Create, Read (Get 1, or List), Update, Delete)
 struct JournalController: RouteCollection {
@@ -27,8 +32,16 @@ struct JournalController: RouteCollection {
     
     // List
     @Sendable
-    func index(req: Request) throws -> EventLoopFuture<[Entry]> {
-        return Entry.query(on: req.db).all()
+    func index(req: Request) async throws -> Response {
+        let entries = try await Entry.query(on: req.db).all()
+        
+        if req.headers.accept.mediaTypes.contains(.html) {
+            let context = IndexContext(entries: entries, count: entries.count)
+            let view = req.view.render("index", context)
+            return try await view.encodeResponse(for: req).get()
+        } else {
+            return try await entries.encodeResponse(for: req)
+        }
     }
     
     @Sendable
