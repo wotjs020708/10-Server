@@ -29,7 +29,7 @@ final class Admin: Model, Content {
   }
 }
 
-extension Admin: ModelAuthenticatable {
+extension Admin:ModelSessionAuthenticatable, ModelAuthenticatable {
   static let usernameKey = \Admin.$name
   static let passwordHashKey = \Admin.$passwordHash
 
