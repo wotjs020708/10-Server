@@ -13,6 +13,7 @@ public func configure(_ app: Application) async throws {
     // 마이그레이션 코드 추가
     app.migrations.add(CreateEntry())
     app.migrations.add(CreateAdmin())
+    app.migrations.add(CreateAdminUser())
     
     // 템플릿 엔진 leaf 추가
     app.views.use(.leaf)
