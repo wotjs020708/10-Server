@@ -11,7 +11,9 @@ import SwiftUI
 struct VaporEntryAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                EntriesView()
+            }
         }
     }
 }
