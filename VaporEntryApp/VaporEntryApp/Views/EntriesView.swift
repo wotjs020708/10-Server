@@ -12,10 +12,11 @@ struct EntriesView: View {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
         UINavigationBar.appearance().tintColor = .white
     }
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
             Color(.colorBackground).ignoresSafeArea()
-        
+            
             ScrollView {
                 ForEach(0..<20) { num in
                     VStack{
@@ -33,7 +34,7 @@ struct EntriesView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom)
                         
-
+                        
                     }
                     
                 }
@@ -49,6 +50,16 @@ struct EntriesView: View {
                 NavigationLink(destination: AddEntryView()) {
                     Image(systemName: "plus")
                         .tint(.white)
+                }
+                
+            }
+            ToolbarItem(placement: .topBarLeading) {
+                Button{
+                    dismiss()
+                } label: {
+                    Text("Log Out")
+                        .foregroundStyle(.white)
+                        .bold()
                 }
             }
             
