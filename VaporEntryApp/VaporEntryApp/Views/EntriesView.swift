@@ -16,7 +16,7 @@ struct EntriesView: View {
     var body: some View {
         ZStack {
             Color(.colorBackground).ignoresSafeArea()
-            
+           
             ScrollView {
                 ForEach(0..<20) { num in
                     VStack{

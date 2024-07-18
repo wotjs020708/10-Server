@@ -24,6 +24,7 @@ struct EntryView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 200)
                     .padding(.top)
+                    .padding(.bottom)
                 VStack {
                     Text("Create stunning social")
                         .font(.system(size: 28))
@@ -74,7 +75,9 @@ struct EntryView: View {
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, maxHeight: 40)
                     }
-                }.padding()
+                }
+                .padding(.leading)
+                .padding(.trailing)
                 
                 
                 NavigationLink(destination: LoginView()){
